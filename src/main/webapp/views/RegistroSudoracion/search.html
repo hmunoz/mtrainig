@@ -1,0 +1,94 @@
+<div class="form-horizontal">
+    <h3>Create a new RegistroSudoracion</h3>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-2">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/RegistroSudoracions/new"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for RegistroSudoracions</h3>
+    <form id="RegistroSudoracionSearch" class="form-horizontal">
+        
+
+    <div class="form-group">
+        <label for="pesoInicial" class="col-sm-2 control-label">Peso Inicial</label>
+        <div class="col-sm-10">
+            <input id="pesoInicial" name="pesoInicial" class="form-control" type="text" ng-model="search.pesoInicial" placeholder="Enter the RegistroSudoracion Peso Inicial"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pesoFinal" class="col-sm-2 control-label">Peso Final</label>
+        <div class="col-sm-10">
+            <input id="pesoFinal" name="pesoFinal" class="form-control" type="text" ng-model="search.pesoFinal" placeholder="Enter the RegistroSudoracion Peso Final"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="liquidoIngerido" class="col-sm-2 control-label">Liquido Ingerido</label>
+        <div class="col-sm-10">
+            <input id="liquidoIngerido" name="liquidoIngerido" class="form-control" type="text" ng-model="search.liquidoIngerido" placeholder="Enter the RegistroSudoracion Liquido Ingerido"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="temperatura" class="col-sm-2 control-label">Temperatura</label>
+        <div class="col-sm-10">
+            <input id="temperatura" name="temperatura" class="form-control" type="text" ng-model="search.temperatura" placeholder="Enter the RegistroSudoracion Temperatura"></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="humedad" class="col-sm-2 control-label">Humedad</label>
+        <div class="col-sm-10">
+            <input id="humedad" name="humedad" class="form-control" type="text" ng-model="search.humedad" placeholder="Enter the RegistroSudoracion Humedad"></input>
+        </div>
+    </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-10">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><span class="glyphicon glyphicon-search"></span> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+        <div class="table-responsive">
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th>Peso Inicial</th>
+                    <th>Peso Final</th>
+                    <th>Liquido Ingerido</th>
+                    <th>Temperatura</th>
+                    <th>Humedad</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <td><a href="#/RegistroSudoracions/edit/{{result.id}}">{{result.pesoInicial}}</a></td>
+                    <td><a href="#/RegistroSudoracions/edit/{{result.id}}">{{result.pesoFinal}}</a></td>
+                    <td><a href="#/RegistroSudoracions/edit/{{result.id}}">{{result.liquidoIngerido}}</a></td>
+                    <td><a href="#/RegistroSudoracions/edit/{{result.id}}">{{result.temperatura}}</a></td>
+                    <td><a href="#/RegistroSudoracions/edit/{{result.id}}">{{result.humedad}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <ul class="pagination pagination-centered">
+        <li ng-class="{disabled:currentPage == 0}">
+            <a id="prev" href ng-click="previous()">«</a>
+        </li>
+        <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+            <a href ng-bind="n + 1">1</a>
+        </li>
+        <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+            <a id="next" href ng-click="next()">»</a>
+        </li>
+    </ul>
+
+</div>

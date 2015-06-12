@@ -1,0 +1,59 @@
+<header ng-switch on="$location.path().indexOf('/RegistroSudoracions/new') > -1">
+    <h3 ng-switch-when="true">Create a new RegistroSudoracion</h3>
+    <h3 ng-switch-when="false">View or edit RegistroSudoracion</h3>
+</header>
+<form id="RegistroSudoracionForm" name="RegistroSudoracionForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': RegistroSudoracionForm.pesoInicial.$invalid}">
+        <label for="pesoInicial" class="col-sm-2 control-label">Peso Inicial</label>
+        <div id="pesoInicialControls" class="col-sm-10">
+            <input id="pesoInicial" name="pesoInicial" type="number" class="form-control" ng-model="registroSudoracion.pesoInicial" placeholder="Enter the RegistroSudoracion Peso Inicial"></input>
+            <span class="help-block error" ng-show="RegistroSudoracionForm.pesoInicial.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': RegistroSudoracionForm.pesoFinal.$invalid}">
+        <label for="pesoFinal" class="col-sm-2 control-label">Peso Final</label>
+        <div id="pesoFinalControls" class="col-sm-10">
+            <input id="pesoFinal" name="pesoFinal" type="number" class="form-control" ng-model="registroSudoracion.pesoFinal" placeholder="Enter the RegistroSudoracion Peso Final"></input>
+            <span class="help-block error" ng-show="RegistroSudoracionForm.pesoFinal.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': RegistroSudoracionForm.liquidoIngerido.$invalid}">
+        <label for="liquidoIngerido" class="col-sm-2 control-label">Liquido Ingerido</label>
+        <div id="liquidoIngeridoControls" class="col-sm-10">
+            <input id="liquidoIngerido" name="liquidoIngerido" type="number" class="form-control" ng-model="registroSudoracion.liquidoIngerido" placeholder="Enter the RegistroSudoracion Liquido Ingerido"></input>
+            <span class="help-block error" ng-show="RegistroSudoracionForm.liquidoIngerido.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': RegistroSudoracionForm.temperatura.$invalid}">
+        <label for="temperatura" class="col-sm-2 control-label">Temperatura</label>
+        <div id="temperaturaControls" class="col-sm-10">
+            <input id="temperatura" name="temperatura" type="number" class="form-control" ng-model="registroSudoracion.temperatura" placeholder="Enter the RegistroSudoracion Temperatura"></input>
+            <span class="help-block error" ng-show="RegistroSudoracionForm.temperatura.$error.number">not a number</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': RegistroSudoracionForm.humedad.$invalid}">
+        <label for="humedad" class="col-sm-2 control-label">Humedad</label>
+        <div id="humedadControls" class="col-sm-10">
+            <input id="humedad" name="humedad" type="number" class="form-control" ng-model="registroSudoracion.humedad" placeholder="Enter the RegistroSudoracion Humedad"></input>
+            <span class="help-block error" ng-show="RegistroSudoracionForm.humedad.$error.number">not a number</span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveRegistroSudoracion" name="saveRegistroSudoracion" class="btn btn-primary" ng-disabled="isClean() || RegistroSudoracionForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteRegistroSudoracion" name="deleteRegistroSudoracion" class="btn btn-danger" ng-show="registroSudoracion.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

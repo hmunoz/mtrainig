@@ -1,0 +1,45 @@
+<header ng-switch on="$location.path().indexOf('/Dia/new') > -1">
+    <h3 ng-switch-when="true">Create a new Dia</h3>
+    <h3 ng-switch-when="false">View or edit Dia</h3>
+</header>
+<form id="DiaForm" name="DiaForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': DiaForm.turnoManana.$invalid}">
+        <label for="turnoManana" class="col-sm-2 control-label">Turno Manana</label>
+        <div id="turnoMananaControls" class="col-sm-10">
+        <select id="turnoManana" name="turnoManana" class="form-control" ng-model="turnoMananaSelection" ng-options="t.text for t in turnoMananaSelectionList"  >
+            <option value="">Choose a Turno Manana</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': DiaForm.turnoTarde.$invalid}">
+        <label for="turnoTarde" class="col-sm-2 control-label">Turno Tarde</label>
+        <div id="turnoTardeControls" class="col-sm-10">
+        <select id="turnoTarde" name="turnoTarde" class="form-control" ng-model="turnoTardeSelection" ng-options="t.text for t in turnoTardeSelectionList"  >
+            <option value="">Choose a Turno Tarde</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': DiaForm.fecha.$invalid}">
+        <label for="fecha" class="col-sm-2 control-label">Fecha</label>
+        <div id="fechaControls" class="col-sm-10">
+            <date id="fecha" name="fecha" ng-model="dia.fecha" placeholder="Enter the Dia Fecha"></date>
+            <span class="help-block error" ng-show="DiaForm.fecha.$error.dateFormat">does not match format "yyyy-MM-dd" (e.g. 2013-12-01)</span>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveDia" name="saveDia" class="btn btn-primary" ng-disabled="isClean() || DiaForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteDia" name="deleteDia" class="btn btn-danger" ng-show="dia.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

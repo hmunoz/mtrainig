@@ -1,0 +1,71 @@
+<div class="form-horizontal">
+    <h3>Create a new SuplementoTipoEntrenamiento</h3>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-2">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/SuplementoTipoEntrenamientos/new"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for SuplementoTipoEntrenamientos</h3>
+    <form id="SuplementoTipoEntrenamientoSearch" class="form-horizontal">
+        
+
+    <div class="form-group">
+        <label for="suplemento" class="col-sm-2 control-label">Suplemento</label>
+        <div class="col-sm-10">
+            <select id="suplemento" name="suplemento" class="form-control" ng-model="search.suplemento" ng-options="s as s.id for s in suplementoList">
+                <option value="">Choose a Suplemento</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="tipoEntrenamiento" class="col-sm-2 control-label">Tipo Entrenamiento</label>
+        <div class="col-sm-10">
+            <select id="tipoEntrenamiento" name="tipoEntrenamiento" class="form-control" ng-model="search.tipoEntrenamiento" ng-options="t as t.id for t in tipoEntrenamientoList">
+                <option value="">Choose a Tipo Entrenamiento</option>
+            </select>
+        </div>
+    </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-10">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><span class="glyphicon glyphicon-search"></span> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+        <div class="table-responsive">
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th>Suplemento</th>
+                    <th>Tipo Entrenamiento</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                        <td><a href="#/SuplementoTipoEntrenamientos/edit/{{result.id}}">{{result.suplemento.id}}</a></td>
+                        <td><a href="#/SuplementoTipoEntrenamientos/edit/{{result.id}}">{{result.tipoEntrenamiento.id}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <ul class="pagination pagination-centered">
+        <li ng-class="{disabled:currentPage == 0}">
+            <a id="prev" href ng-click="previous()">«</a>
+        </li>
+        <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+            <a href ng-bind="n + 1">1</a>
+        </li>
+        <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+            <a id="next" href ng-click="next()">»</a>
+        </li>
+    </ul>
+
+</div>

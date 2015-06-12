@@ -1,0 +1,37 @@
+<header ng-switch on="$location.path().indexOf('/Atleta/new') > -1">
+    <h3 ng-switch-when="true">Create a new Atleta</h3>
+    <h3 ng-switch-when="false">View or edit Atleta</h3>
+</header>
+<form id="AtletaForm" name="AtletaForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': AtletaForm.usuario.$invalid}">
+        <label for="usuario" class="col-sm-2 control-label">Usuario</label>
+        <div id="usuarioControls" class="col-sm-10">
+        <select id="usuario" name="usuario" class="form-control" ng-model="usuarioSelection" ng-options="u.text for u in usuarioSelectionList"  >
+            <option value="">Choose a Usuario</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': AtletaForm.suplementos.$invalid}">
+        <label for="suplementos" class="col-sm-2 control-label">Suplementos</label>
+        <div id="suplementosControls" class="col-sm-10">
+            <select id="suplementos" name="suplementos" multiple class="form-control" ng-model="suplementosSelection" ng-options="s.text for s in suplementosSelectionList">
+                <option value="">Choose a Suplementos</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveAtleta" name="saveAtleta" class="btn btn-primary" ng-disabled="isClean() || AtletaForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteAtleta" name="deleteAtleta" class="btn btn-danger" ng-show="atleta.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

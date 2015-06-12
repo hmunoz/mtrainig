@@ -1,0 +1,46 @@
+<header ng-switch on="$location.path().indexOf('/Entrenamientos/new') > -1">
+    <h3 ng-switch-when="true">Create a new Entrenamiento</h3>
+    <h3 ng-switch-when="false">View or edit Entrenamiento</h3>
+</header>
+<form id="EntrenamientoForm" name="EntrenamientoForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': EntrenamientoForm.localidad.$invalid}">
+        <label for="localidad" class="col-sm-2 control-label">Localidad</label>
+        <div id="localidadControls" class="col-sm-10">
+        <select id="localidad" name="localidad" class="form-control" ng-model="localidadSelection" ng-options="l.text for l in localidadSelectionList"  >
+            <option value="">Choose a Localidad</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': EntrenamientoForm.atletas.$invalid}">
+        <label for="atletas" class="col-sm-2 control-label">Atletas</label>
+        <div id="atletasControls" class="col-sm-10">
+            <select id="atletas" name="atletas" multiple class="form-control" ng-model="atletasSelection" ng-options="a.text for a in atletasSelectionList">
+                <option value="">Choose a Atletas</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': EntrenamientoForm.dias.$invalid}">
+        <label for="dias" class="col-sm-2 control-label">Dias</label>
+        <div id="diasControls" class="col-sm-10">
+            <select id="dias" name="dias" multiple class="form-control" ng-model="diasSelection" ng-options="d.text for d in diasSelectionList">
+                <option value="">Choose a Dias</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveEntrenamiento" name="saveEntrenamiento" class="btn btn-primary" ng-disabled="isClean() || EntrenamientoForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteEntrenamiento" name="deleteEntrenamiento" class="btn btn-danger" ng-show="entrenamiento.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

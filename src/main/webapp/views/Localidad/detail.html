@@ -1,0 +1,27 @@
+<header ng-switch on="$location.path().indexOf('/Localidads/new') > -1">
+    <h3 ng-switch-when="true">Create a new Localidad</h3>
+    <h3 ng-switch-when="false">View or edit Localidad</h3>
+</header>
+<form id="LocalidadForm" name="LocalidadForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Something broke. Retry, or cancel and start afresh.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': LocalidadForm.nombre.$invalid}">
+        <label for="nombre" class="col-sm-2 control-label">Nombre</label>
+        <div id="nombreControls" class="col-sm-10">
+            <input id="nombre" name="nombre" type="text" required class="form-control" ng-model="localidad.nombre" placeholder="Enter the Localidad Nombre"></input>
+            <span class="help-block error" ng-show="LocalidadForm.nombre.$error.required">required</span> 
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveLocalidad" name="saveLocalidad" class="btn btn-primary" ng-disabled="isClean() || LocalidadForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Save</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Cancel</button>
+            <button id="deleteLocalidad" name="deleteLocalidad" class="btn btn-danger" ng-show="localidad.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+        </div>
+    </div>
+</form>

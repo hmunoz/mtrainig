@@ -1,0 +1,74 @@
+<div class="form-horizontal">
+    <h3>Create a new Dia</h3>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-2">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/Dia/new"><span class="glyphicon glyphicon-plus-sign"></span> Create</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div>
+    <h3>Search for Dia</h3>
+    <form id="DiaSearch" class="form-horizontal">
+        
+
+    <div class="form-group">
+        <label for="turnoManana" class="col-sm-2 control-label">Turno Manana</label>
+        <div class="col-sm-10">
+            <select id="turnoManana" name="turnoManana" class="form-control" ng-model="search.turnoManana" ng-options="t as t.id for t in turnoMananaList">
+                <option value="">Choose a Turno Manana</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="turnoTarde" class="col-sm-2 control-label">Turno Tarde</label>
+        <div class="col-sm-10">
+            <select id="turnoTarde" name="turnoTarde" class="form-control" ng-model="search.turnoTarde" ng-options="t as t.id for t in turnoTardeList">
+                <option value="">Choose a Turno Tarde</option>
+            </select>
+        </div>
+    </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-sm-10">
+                <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><span class="glyphicon glyphicon-search"></span> Search</a>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="search-results">
+        <div class="table-responsive">
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th>Turno Manana</th>
+                    <th>Turno Tarde</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                        <td><a href="#/Dia/edit/{{result.id}}">{{result.turnoManana.id}}</a></td>
+                        <td><a href="#/Dia/edit/{{result.id}}">{{result.turnoTarde.id}}</a></td>
+                    <td><a href="#/Dia/edit/{{result.id}}">{{result.fecha| date:'mediumDate'}}</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <ul class="pagination pagination-centered">
+        <li ng-class="{disabled:currentPage == 0}">
+            <a id="prev" href ng-click="previous()">«</a>
+        </li>
+        <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+            <a href ng-bind="n + 1">1</a>
+        </li>
+        <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+            <a id="next" href ng-click="next()">»</a>
+        </li>
+    </ul>
+
+</div>
